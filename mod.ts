@@ -1,29 +1,29 @@
-import { join, BufReader, parse } from "./deps.ts";
+import { join, BufReader, parse, _ } from "./deps.ts";
 
 interface Planet {
     [ key : string ]: string
 }
 
-async function loadAllExoplanetsData() {
+async function loadAllExoplanetsData(): Promise<Array<Planet>> {
     const filepath = join("assets", "kepler_exoplanets_nasa.csv");
 
     const exoplanets_file = Deno.openSync(filepath);
     const bufReader = new BufReader(exoplanets_file);
 
-    const exoplanets_data = await parse(bufReader, {
+    const exoplanets_data: Planet[] = await parse(bufReader, {
         header: true,
         comment: "#"
-    });
+    }) as Array<Planet>;
 
     Deno.close(exoplanets_file.rid);
 
     return exoplanets_data;
 }
 
-async function filterForEarthLikeProps() {
+async function findEarthLikeQualities(): Promise<Array<Planet>> {
     const allExoplanets = await loadAllExoplanetsData();
 
-    const newEarthLike = (allExoplanets as Array<Planet>).filter((exoplanet) => {
+    const newEarthLike: Planet[] = (allExoplanets as Array<Planet>).filter((exoplanet) => {
         const planetaryRadius = Number(exoplanet["koi_prad"]);
         const stellarMass = Number(exoplanet["koi_smass"]);
         const stellarRadius = Number(exoplanet["koi_srad"]);
@@ -37,10 +37,46 @@ async function filterForEarthLikeProps() {
     return newEarthLike;
 }
 
-const newEarthLikePlanets = await filterForEarthLikeProps();
+function showRelevantProperties(exoplanets: Array<Planet>): Array<Planet> {
+    return exoplanets.map((exoplanet) => {
+        return _.pick(exoplanet, [
+            "kepid",
+            "kepoi_name",
+            "kepler_name",
+            "koi_prad",
+            "koi_smass",
+            "koi_srad",
+            "koi_count",
+            "koi_sage",
+            "koi_steff",
+            "koi_period"
+        ])
+    });
+}
 
-// for (const exoplanet of newEarthLikePlanets) {
-//     console.log(exoplanet);
-// }
+function filterForNumericProperty(exoplanets: Array<Planet>, property: string): Array<number> {
+    const filtered = exoplanets.map((exoplanet) => {
+        return Number(exoplanet[property]);
+    });
 
-console.log(`${newEarthLikePlanets.length} habitable planets found!`);
+    return filtered;
+}
+
+//---------------------------------------------------------------------
+// ----------                 MAIN PROGRAM                   ----------
+//---------------------------------------------------------------------
+
+const newEarthLikePlanets = showRelevantProperties(await findEarthLikeQualities());
+
+for (const exoplanet of newEarthLikePlanets) {
+    console.log(exoplanet);
+}
+
+console.log(`\n${newEarthLikePlanets.length} habitable planets found!`);
+
+// Earth-like Exoplanet Orbital Periods
+const orbitalPeriods = filterForNumericProperty(newEarthLikePlanets, "koi_period");
+const minPeriod = Math.min(...orbitalPeriods);
+const maxPeriod = Math.max(...orbitalPeriods);
+console.log(`Shortest Orbital: ${minPeriod} days`);
+console.log(`Longest Orbital: ${maxPeriod} days`);
