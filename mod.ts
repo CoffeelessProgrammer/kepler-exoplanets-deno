@@ -1,6 +1,4 @@
-import { join } from "https://deno.land/std/path/mod.ts";
-import { BufReader } from "https://deno.land/std/io/bufio.ts";
-import { parse } from "https://deno.land/std/encoding/csv.ts";
+import { join, BufReader, parse } from "./deps.ts";
 
 interface Planet {
     [ key : string ]: string
@@ -40,5 +38,9 @@ async function filterForEarthLikeProps() {
 }
 
 const newEarthLikePlanets = await filterForEarthLikeProps();
+
+// for (const exoplanet of newEarthLikePlanets) {
+//     console.log(exoplanet);
+// }
 
 console.log(`${newEarthLikePlanets.length} habitable planets found!`);

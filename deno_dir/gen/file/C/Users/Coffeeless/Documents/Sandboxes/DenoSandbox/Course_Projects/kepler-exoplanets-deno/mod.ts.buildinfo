@@ -296,8 +296,13 @@
         "signature": "64534077629",
         "affectsGlobalScope": false
       },
+      "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/deps.ts": {
+        "version": "0bb9e5a03406034b0d71f2c4d40967cbf480e7d55da11d8ed822124abe4884c6",
+        "signature": "-3064509866",
+        "affectsGlobalScope": false
+      },
       "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/mod.ts": {
-        "version": "939448bb759a512d75bb5a3222a799ba6ec1e0204c479080af01e6d01ba920d6",
+        "version": "405a989b335894848635a475cb8723188d9f90c07cbc7c2b3ae5ccc780fa403b",
         "signature": "-3531856636",
         "affectsGlobalScope": false
       }
@@ -321,10 +326,13 @@
       "tsBuildInfoFile": "./tsbuildinfo.json"
     },
     "referencedMap": {
-      "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/mod.ts": [
+      "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/deps.ts": [
         "https://deno.land/std/encoding/csv.ts",
         "https://deno.land/std/io/bufio.ts",
         "https://deno.land/std/path/mod.ts"
+      ],
+      "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/mod.ts": [
+        "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/deps.ts"
       ],
       "https://deno.land/std/encoding/csv.ts": [
         "https://deno.land/std/_util/assert.ts",
@@ -385,6 +393,11 @@
       ]
     },
     "exportedModulesMap": {
+      "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/deps.ts": [
+        "https://deno.land/std/encoding/csv.ts",
+        "https://deno.land/std/io/bufio.ts",
+        "https://deno.land/std/path/mod.ts"
+      ],
       "https://deno.land/std/encoding/csv.ts": [
         "https://deno.land/std/io/bufio.ts"
       ],
@@ -452,6 +465,19 @@
       "asset:///lib.esnext.intl.d.ts",
       "asset:///lib.esnext.promise.d.ts",
       "asset:///lib.esnext.string.d.ts",
+      [
+        "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/deps.ts",
+        [
+          {
+            "file": "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/deps.ts",
+            "start": 253,
+            "length": 49,
+            "code": 7016,
+            "category": 1,
+            "messageText": "Could not find a declaration file for module 'https://deno.land/x/lodash@4.17.15-es/lodash.js'. 'https://deno.land/x/lodash@4.17.15-es/lodash.js' implicitly has an 'any' type."
+          }
+        ]
+      ],
       "file:///C:/Users/Coffeeless/Documents/Sandboxes/DenoSandbox/Course_Projects/kepler-exoplanets-deno/mod.ts",
       "https://deno.land/std/_util/assert.ts",
       "https://deno.land/std/bytes/mod.ts",
